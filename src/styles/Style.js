@@ -10,8 +10,13 @@ export const defaultStyle = StyleSheet.create({
         textAlign: 'center',
         padding: 10, 
         fontSize: 42
+    },
+    btn: {
+        width: 200,
+        color: '#ADD8E6',
     }
 })
+
 export const todoStyle = StyleSheet.create({
     container: {
         flex: 1,
@@ -20,16 +25,16 @@ export const todoStyle = StyleSheet.create({
     },
     formContainer: {
         flexDirection: 'row',
-        height: 20,
-        marginTop: 20,
-        marginBottom: 20,
+        height: 10,
+        marginTop: 10,
+        marginBottom: 10,
         flex: 1,
         paddingTop: 10,
         paddingBottom: 10,
-        paddingLeft: 30,
-        paddingRight: 30,
+        paddingLeft: 10,
+        paddingRight: 10,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     input: {
         height: 48,
@@ -44,15 +49,21 @@ export const todoStyle = StyleSheet.create({
         height: 47,
         borderRadius: 5,
         backgroundColor: '#efb943',
-        width: 80,
+        width: 100,
         alignItems: "center",
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginVertical: 8,
+        marginHorizontal: 5
     },
     buttonText: {
         color: 'white',
-        fontSiz: 16,
+        fontSiz: 20,
         fontweight: 'bold'
     },
+    fixToText: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      },
     listContainer: {
         marginTop: 20,
         padding: 20,
@@ -64,10 +75,20 @@ export const todoStyle = StyleSheet.create({
         paddingBottom: 16,
         marginVertical: 8,
         borderBottomWidth: StyleSheet.hairlineWidth,
+        borderbox: 'border-box',
     },
     entityText: {
         fontSize: 20,
         color: '#333333'
+    },
+    switch: {
+        marginTop: 26,
+        marginBottom: 16,
+        marginRight: 16,
+        marginLeft: 16,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 5,
     }
 });
 
@@ -76,4 +97,25 @@ export const registerStyle = StyleSheet.create({
         flex: 1,
         alignItems: 'center'
     }
+});
+
+export const loginStyle = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    inline: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: 180,
+        flex: 1,
+        alignItems: 'center',
+    },
+    btn:{
+        width: 200,
+        padding: 10,
+        marginHorizontal: 20,
+      
+    }
+
 });

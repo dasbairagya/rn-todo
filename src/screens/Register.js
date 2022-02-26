@@ -2,11 +2,11 @@ import { Text, View, Button, Image } from 'react-native'
 import React from 'react'
 import * as Styles from '../styles/Style';
 
-const Create = () => {
-  console.log('Register');
+const Create = (navigation) => {
+  navigation.navigate('Todo'); //Navigate to Todo screen
 
 }
-const Register = () => {
+const Register = ({navigation}) => {
   return (
     <View style={Styles.defaultStyle.container}>
       <Image source={require('../../assets/favicon.png')} 
@@ -15,7 +15,7 @@ const Register = () => {
       <Text style={Styles.defaultStyle.text}>Register</Text>
       <Button
         title="Press me"
-        onPress={Create}
+        onPress={()=>{Create(navigation)}}
       />
     </View>
   )

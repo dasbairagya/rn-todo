@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 const Home = () => {
   return (
     <>
-    <Tab.Navigator style={styles.tab}>
+    <Tab.Navigator>
       <Tab.Screen name="Sign-In" component={Login} />
       <Tab.Screen name="Register" component={Register} />
     </Tab.Navigator>
@@ -22,8 +22,5 @@ const Home = () => {
 export default Home
 
 const styles = StyleSheet.create({
-  tab: {
-    backgroundColor: 'red',
-    height: '100%',
-  }
+
 })

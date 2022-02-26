@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, FlatList, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, FlatList, ScrollView, Image, Switch } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import * as Styles from '../styles/Style';
 
@@ -9,6 +9,8 @@ const Todo = ({navigation}) => {
   const [isCheckedItem, setIsCheckedItem] = useState(false);
   const [isSetItemId, setIsSetItemId] = useState('');
   const [toggleEdit, setToggleEdit] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   useEffect(() => {
     const newItem = {
@@ -18,12 +20,12 @@ const Todo = ({navigation}) => {
   };
   setItems([...items, newItem]);
 //   console.log(items);
-  }, [])
+  }, []);
 
 
   //add item to list
   const addItem = () => {
-    console.log(item);
+    // console.log(item);
     if(!item){
 
         alert('Please enter a value');
@@ -60,18 +62,36 @@ const Todo = ({navigation}) => {
   const renderEntity = ({item, index}) => {
     return (
       <>
+      <View style={Styles.todoStyle.fixToText}>
         <View style={Styles.todoStyle.entityContainer}>
-            <Text style={Styles.todoStyle.entityText}>
+            <Text style={Styles.todoStyle.entityText} >
                 {index+1}. {item.value}
             </Text>
         </View>
+        <Switch
+        style={Styles.todoStyle.switch}
+        trackColor={{ false: "#767577", true: "#767577" }}
+        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      />
+     </View>
      </>
     )
   }
 
 
   return (
+
     <View style={Styles.todoStyle.container}>
+        <Image
+            source={{
+            uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
+            }}
+            style={{ width: 100, height: 100 }}
+        />
+        <Text style={Styles.defaultStyle.text}>My Todo</Text>
         <View style={Styles.todoStyle.formContainer}>
             <TextInput
                 style={Styles.todoStyle.input}
@@ -100,10 +120,8 @@ const Todo = ({navigation}) => {
         )}
         </ScrollView>
         <TouchableOpacity style={Styles.todoStyle.button} >
-            <Button title="Logout" style={Styles.todoStyle.buttonText} onPress={()=>{navigation.navigate('Register')}} />    
+            <Button title="Logout" color="rgb(239, 185, 67)" style={Styles.todoStyle.buttonText} onPress={()=>{navigation.popToTop('Home')}} />    
         </TouchableOpacity>
-        
-    
     </View>
   )
 }
