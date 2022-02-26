@@ -1,20 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Todo from './src/screens/Todo';
+import { StyleSheet, View } from 'react-native';
+import Nav from './src/navigaton/Nav';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Todo />
+     <Nav />
     </View>
+   
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    paddingBottom: 20
   },
 });
+

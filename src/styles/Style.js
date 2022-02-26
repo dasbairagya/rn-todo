@@ -1,9 +1,22 @@
 import { StyleSheet } from 'react-native';
 
+export const defaultStyle = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: '#ADD8E6'
+    },
+    text:{
+        textAlign: 'center',
+        padding: 10, 
+        fontSize: 42
+    }
+})
 export const todoStyle = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#FFFF99'
     },
     formContainer: {
         flexDirection: 'row',
@@ -30,14 +43,15 @@ export const todoStyle = StyleSheet.create({
     button: {
         height: 47,
         borderRadius: 5,
-        backgroundColor: '#788eec',
+        backgroundColor: '#efb943',
         width: 80,
         alignItems: "center",
         justifyContent: 'center'
     },
     buttonText: {
         color: 'white',
-        fontSiz: 16
+        fontSiz: 16,
+        fontweight: 'bold'
     },
     listContainer: {
         marginTop: 20,
@@ -47,7 +61,9 @@ export const todoStyle = StyleSheet.create({
         marginTop: 16,
         borderBottomColor: '#cccccc',
         borderBottomWidth: 1,
-        paddingBottom: 16
+        paddingBottom: 16,
+        marginVertical: 8,
+        borderBottomWidth: StyleSheet.hairlineWidth,
     },
     entityText: {
         fontSize: 20,
