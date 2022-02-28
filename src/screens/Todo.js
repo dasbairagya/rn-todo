@@ -156,7 +156,7 @@ const Todo = ({navigation}) => {
                 marginBottom: 20,
                 
               }}
-              onPress={()=>{navigation.navigate('Home')}} 
+              onPress={()=>{navigation.replace('Home')}} 
             
           />
 

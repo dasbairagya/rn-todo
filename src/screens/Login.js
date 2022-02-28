@@ -88,7 +88,7 @@ const Login = ({ navigation }) => {
       try {
         // await AsyncStorage.setItem('user', JSON.stringify(data));
         
-        navigation.popToTop();
+        navigation.replace('Todo');
       } catch (e) {
         // saving error
       }
