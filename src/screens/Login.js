@@ -52,6 +52,15 @@ const Login = ({ navigation }) => {
     }, 1000);
   }, [isloading]); 
 
+  const showError = () => { //tigger wherever isloading state changes
+    setTimeout(() => {
+      //will check if the user is already login or not here
+      setError(false);
+    }, 2000);
+  }; 
+
+
+
   //loader
   if(isloading){
       return (
@@ -72,8 +81,9 @@ const Login = ({ navigation }) => {
   const SignIn = async () => {
 
     // setIsloading(true);
+    setError(false);
 
-    if(username === 'admin' && password === 'password'){
+    if(username === 'admin' && password === 'PASSWORD'){
       ResetInputs()
       try {
         // await AsyncStorage.setItem('user', JSON.stringify(data));
@@ -83,7 +93,8 @@ const Login = ({ navigation }) => {
       }
 
     }else{
-      alert('Invalid username or password');
+      setError(true);
+      showError();
     }
 
   }
@@ -115,8 +126,15 @@ const Login = ({ navigation }) => {
             leftIcon={{ type: 'material', name: 'lock' }}
             value={password}
             onChangeText={(val) => validatePass(val)}
+            secureTextEntry
           />
           {isValidPass ? null : <Text style={Styles.loginStyle.errorMsg}>Password nust be 8 caharacters long.</Text>}
+          {!error ? null : 
+              
+                //will check if the user is already login or not here
+                <Text style={Styles.loginStyle.errorMsg}>Invalid username and password supply.</Text>
+          }
+              
           
             <Button title='LOGIN' 
               icon={{

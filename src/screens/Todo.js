@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, FlatList, ScrollView, Image, Switch } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useLayoutEffect } from 'react'
 import * as Styles from '../styles/Style';
+import { AntDesign } from '@expo/vector-icons';
+import { Avatar } from 'react-native-elements';
 
 const Todo = ({navigation}) => {
 
@@ -80,10 +82,34 @@ const Todo = ({navigation}) => {
      </>
     )
   }
+  useLayoutEffect( () => {
+    navigation.setOptions({
 
+        headerRight: () => (
+          <TouchableOpacity style={{ marginRight:20 }} onPress={navigation.navigate('Home')}>
+            <AntDesign name="logout" size={24} color="black"/>
+          </TouchableOpacity>
+        ),
+        headerLeft: () => (
+          <View style={{marginLeft:10}}>
+            <Avatar
+              size={54}
+              rounded
+              source={{ uri: 'https://randomuser.me/api/portraits/women/57.jpg' }}
+              title="Bj"
+              containerStyle={{ backgroundColor: 'grey' }}
+            >
+              <Avatar.Accessory size={23} />
+            </Avatar>
+            {/* <Avatar rounded source={{uri:auth?.currentUser?.photoURL}} /> */}
+          </View>
+        )
+        
+    })
+  })
 
   return (
-
+<>
     <View style={Styles.todoStyle.container}>
         <Image
             source={{
@@ -106,7 +132,7 @@ const Todo = ({navigation}) => {
                 <Text style={Styles.todoStyle.buttonText} onClick={addItem}>Add</Text>
             </TouchableOpacity>
         </View>
-        <ScrollView>
+ 
         { items && (
             <View style={Styles.todoStyle.listContainer}>
                 <FlatList
@@ -118,11 +144,35 @@ const Todo = ({navigation}) => {
             </View>
 
         )}
-        </ScrollView>
-        <TouchableOpacity style={Styles.todoStyle.button} >
-            <Button title="Logout" color="rgb(239, 185, 67)" style={Styles.todoStyle.buttonText} onPress={()=>{navigation.popToTop('Home')}} />    
-        </TouchableOpacity>
+
+
+
+        {/* <TouchableOpacity  >
+            <Button title="Logout" 
+            color="rgb(239, 185, 67)" 
+            style={Styles.todoStyle.buttonText} 
+            onPress={()=>{navigation.navigate('Home')}} 
+            />    
+        </TouchableOpacity> */}
     </View>
+            <Button title='Logout' 
+            icon={{
+                    name: 'log-out',
+                    type: 'font-awesome',
+                    size: 15,
+                    color: 'white',
+                  }}
+              titleStyle={{ fontWeight: '700' }}
+              buttonStyle={{
+                borderColor: 'transparent',
+                borderWidth: 0,
+                borderRadius: 10,
+                width: 120,
+                marginVertical:20
+              }}
+            
+            />
+            </>
   )
 }
 

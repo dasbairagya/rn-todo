@@ -59,6 +59,7 @@ export const todoStyle = StyleSheet.create({
     buttonText: {
         color: 'white',
         fontSize: 20,
+        paddingBottom: 10,
     },
     fixToText: {
         flexDirection: 'row',
@@ -67,6 +68,7 @@ export const todoStyle = StyleSheet.create({
     listContainer: {
         marginTop: 20,
         padding: 20,
+        maxHeight: 200,
     },
     entityContainer: {
         marginTop: 16,
