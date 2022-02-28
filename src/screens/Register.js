@@ -15,8 +15,7 @@ const Register = ({navigation}) => {
   return (
     <View style={Styles.defaultStyle.container}>
       <Image source={require('../../assets/favicon.png')} 
-      style={{ width: 200, height: 200 }}
-      />
+      style={{ width: 80, height: 80, marginTop: 20 }} />
       <ScrollView>
           <View style={styles.container}>
             <Input
@@ -49,6 +48,8 @@ const Register = ({navigation}) => {
               value={imageUrl}
               onChangeText={(imageUrl) => setImageUrl(imageUrl)}
             />
+            </View>
+          </ScrollView>
             <TouchableOpacity>
               <Button 
               title='REGISTER' 
@@ -69,8 +70,7 @@ const Register = ({navigation}) => {
               />
             </TouchableOpacity>
 
-          </View>
-          </ScrollView>
+          
     </View>
   )
 }
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       padding: 10,
+      width: 300,
   },
   button: {
       marginTop: 10,

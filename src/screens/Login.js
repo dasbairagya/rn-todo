@@ -13,11 +13,37 @@ const Login = ({ navigation }) => {
     }else{
         return [];
     }
-}
+  }   
   const [isloading, setIsloading] = useState(true);
+  // const [user, setUser] = useState(getData());
   const [username, setUsername] = useState('');
+  const [isValidUser, setisValidUser] = useState(true);
+
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState(getData());
+  const [isValidPass, setisValidPass] = useState(true);
+  const [error, setError] = useState(false);
+
+  const validateUser = (val) => {
+    setUsername(val);
+    if(val.trim().length >= 4){
+        setisValidUser(true);
+    }
+    else{
+      setisValidUser(false);
+    }
+
+  }
+
+  const validatePass = (val) => {
+    setPassword(val);
+    if(val.trim().length >= 8){
+      setisValidPass(true);
+    }
+    else{
+      setisValidPass(false);
+    }
+
+  }
 
   useEffect(() => { //tigger wherever isloading state changes
     setTimeout(() => {
@@ -33,23 +59,24 @@ const Login = ({ navigation }) => {
           <ActivityIndicator size="large" color="#0000ff" />
           </View>
       )
-    } 
+  } 
+
+    //clear inputs
+  const ResetInputs = () => {
+    console.log('reset inputs');
+    setUsername('');
+    setPassword('');
+  }
 
   //login
   const SignIn = async () => {
 
     // setIsloading(true);
 
-    console.log(user);
-
-    const data = {
-      username: username,
-      password: password
-    };
-    if(username === 'admin' && password === 'admin'){
+    if(username === 'admin' && password === 'password'){
       ResetInputs()
       try {
-        await AsyncStorage.setItem('user', JSON.stringify(data));
+        // await AsyncStorage.setItem('user', JSON.stringify(data));
         navigation.replace('Todo');
       } catch (e) {
         // saving error
@@ -58,13 +85,10 @@ const Login = ({ navigation }) => {
     }else{
       alert('Invalid username or password');
     }
-    
-}
 
-const ResetInputs = () => {
-  setUsername('');
-  setPassword('');
-}
+  }
+
+
 
   return (
     <>
@@ -73,75 +97,67 @@ const ResetInputs = () => {
           source={{
             uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
           }}
-          style={{ width: 200, height: 200 }}
+          style={{ width: 120, height: 120 }}
         />
-        <Text style={Styles.defaultStyle.title}>{user.username}</Text>
-        <View style={styles.container}>
-      <Input
-        placeholder='Enter your username'
-        label='Username'
-        leftIcon={{ type: 'material', name: 'email' }}
-        value={username}
-        onChangeText={(username) => setUsername(username)}
-      />
+          <View style={styles.container}>
+          <Input
+            placeholder='Enter your username'
+            label='Username'
+            value={username}
+            leftIcon={{ type: 'material', name: 'email' }}
+            onChangeText={(val) => validateUser(val)}
+          />
+          {isValidUser ? null : <Text style={Styles.loginStyle.errorMsg}>Username must be at least 4 characters</Text>}
 
-      <Input
-        placeholder='Enter your password'
-        label='Password'
-        leftIcon={{ type: 'material', name: 'lock' }}
-        value={password}
-        onChangeText={(password) => setPassword(password)}
-        secureTextEntry
-      />
-      <View>
-        <Button title='LOGIN' 
-          icon={{
-                name: 'arrow-right',
-                type: 'font-awesome',
-                size: 15,
-                color: 'white'
+          <Input
+            placeholder='Enter your password'
+            label='Password'
+            leftIcon={{ type: 'material', name: 'lock' }}
+            value={password}
+            onChangeText={(val) => validatePass(val)}
+          />
+          {isValidPass ? null : <Text style={Styles.loginStyle.errorMsg}>Password nust be 8 caharacters long.</Text>}
+          
+            <Button title='LOGIN' 
+              icon={{
+                    name: 'arrow-right',
+                    type: 'font-awesome',
+                    size: 15,
+                    color: 'white'
+                  }}
+                iconRight
+                iconContainerStyle={{ marginLeft: 10 }}
+                titleStyle={{ fontWeight: '700' }}
+                buttonStyle={{
+                  backgroundColor: 'rgba(199, 43, 98, 1)',
+                  borderColor: 'transparent',
+                  borderWidth: 0,
+                  borderRadius: 10,
+                  width: 200,
+                  marginVertical:20
+                }}
+                onPress={SignIn}
+            />
+
+            <Button title='CANCEL' 
+            icon={{
+                    name: 'times',
+                    type: 'font-awesome',
+                    size: 15,
+                    color: 'white',
+                  }}
+              titleStyle={{ fontWeight: '700' }}
+              buttonStyle={{
+                borderColor: 'transparent',
+                borderWidth: 0,
+                borderRadius: 10,
+                width: 200,
+                marginVertical:20
               }}
-            iconRight
-            iconContainerStyle={{ marginLeft: 10 }}
-            titleStyle={{ fontWeight: '700' }}
-            buttonStyle={{
-              backgroundColor: 'rgba(199, 43, 98, 1)',
-              borderColor: 'transparent',
-              borderWidth: 0,
-              borderRadius: 10,
-              width: 200,
-              marginVertical:20
-            }}
-            onPress={SignIn}
-        />
+              onPress={ResetInputs}
+            />
 
-        <Button 
-        title='CANCEL' 
-        icon={{
-                name: 'times',
-                type: 'font-awesome',
-                size: 15,
-                color: 'white',
-              }}
-          titleStyle={{ fontWeight: '700' }}
-          buttonStyle={{
-            borderColor: 'transparent',
-            borderWidth: 0,
-            borderRadius: 10,
-            width: 200,
-            marginVertical:20
-          }}
-          onPress={ResetInputs}
-        />
-
-      </View>
-    </View>
-      {/* <Text style={Styles.defaultStyle.text}>Sign In</Text> */}
-      {/* Pass the navigation object to the function as a prop as navigation is not available outside the main method */}
-      {/* <TouchableOpacity style={Styles.loginStyle.inline}>
-      <Button title="Login" style={Styles.loginStyle.btn} onPress={()=>SignIn(navigation)} /> 
-      <Button title="Cancel" style={Styles.loginStyle.btn} onPress={()=>{navigation.navigate('Register')}} /> 
-      </TouchableOpacity> */}
+        </View>
       </View>
     </>
   )
@@ -153,7 +169,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    padding: 10,
+    width: 300,
 },
 buttons: {
     borderRadius: 10,

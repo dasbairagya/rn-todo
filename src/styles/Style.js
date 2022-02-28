@@ -58,8 +58,7 @@ export const todoStyle = StyleSheet.create({
     },
     buttonText: {
         color: 'white',
-        fontSiz: 20,
-        fontweight: 'bold'
+        fontSize: 20,
     },
     fixToText: {
         flexDirection: 'row',
@@ -76,7 +75,6 @@ export const todoStyle = StyleSheet.create({
         paddingBottom: 16,
         marginVertical: 8,
         borderBottomWidth: StyleSheet.hairlineWidth,
-        borderbox: 'border-box',
     },
     entityText: {
         fontSize: 20,
@@ -116,7 +114,9 @@ export const loginStyle = StyleSheet.create({
         width: 200,
         padding: 10,
         marginHorizontal: 20,
-      
+    },
+    errorMsg:{
+        color: 'red',
     }
 
 });
