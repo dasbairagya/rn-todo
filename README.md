@@ -4,6 +4,13 @@
 
 ![](assets/img/todo.png)
 
+# Home Screen
+
+![](assets/img/home.png)
+
+# Register Screen
+
+![](assets/img/register.png)
 
 ### 1. Creating a new application
 ```

@@ -91,7 +91,7 @@ const Todo = ({navigation}) => {
             }}
             style={{ width: 100, height: 100 }}
         />
-        <Text style={Styles.defaultStyle.text}>My Todo</Text>
+        <Text style={Styles.defaultStyle.text}>My To Do List App</Text>
         <View style={Styles.todoStyle.formContainer}>
             <TextInput
                 style={Styles.todoStyle.input}

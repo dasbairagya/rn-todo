@@ -4,12 +4,13 @@ export const defaultStyle = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: '#ADD8E6'
     },
     text:{
         textAlign: 'center',
         padding: 10, 
-        fontSize: 42
+        fontSize: 20
     },
     btn: {
         width: 200,

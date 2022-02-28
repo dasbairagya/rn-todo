@@ -1,16 +1,69 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import {useEffect, useState} from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import React, {useEffect, useState} from 'react';
 import { Input, Icon, Button } from 'react-native-elements';
 import * as Styles from '../styles/Style';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation }) => {
-  const [email, setEmail] = useState('');
+
+  const getData = async () => {
+    const data = await AsyncStorage.getItem('user')
+    if(data){
+        return JSON.parse(data); //string to array
+    }else{
+        return [];
+    }
+}
+  const [isloading, setIsloading] = useState(true);
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [user, setUser] = useState(getData());
 
-  const SignIn = () => {
+  useEffect(() => { //tigger wherever isloading state changes
+    setTimeout(() => {
+      //will check if the user is already login or not here
+      setIsloading(false);
+    }, 1000);
+  }, [isloading]); 
 
-    // console.log(navigation);
-    navigation.navigate('Todo'); //Navigate to Todo screen
+  //loader
+  if(isloading){
+      return (
+        <View style={Styles.defaultStyle.container}>
+          <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+      )
+    } 
+
+  //login
+  const SignIn = async () => {
+
+    // setIsloading(true);
+
+    console.log(user);
+
+    const data = {
+      username: username,
+      password: password
+    };
+    if(username === 'admin' && password === 'admin'){
+      ResetInputs()
+      try {
+        await AsyncStorage.setItem('user', JSON.stringify(data));
+        navigation.replace('Todo');
+      } catch (e) {
+        // saving error
+      }
+
+    }else{
+      alert('Invalid username or password');
+    }
+    
+}
+
+const ResetInputs = () => {
+  setUsername('');
+  setPassword('');
 }
 
   return (
@@ -22,13 +75,14 @@ const Login = ({ navigation }) => {
           }}
           style={{ width: 200, height: 200 }}
         />
+        <Text style={Styles.defaultStyle.title}>{user.username}</Text>
         <View style={styles.container}>
       <Input
-        placeholder='Enter your email'
-        label='Email'
+        placeholder='Enter your username'
+        label='Username'
         leftIcon={{ type: 'material', name: 'email' }}
-        value={email}
-        onChangeText={(email) => setEmail(email)}
+        value={username}
+        onChangeText={(username) => setUsername(username)}
       />
 
       <Input
@@ -77,7 +131,7 @@ const Login = ({ navigation }) => {
             width: 200,
             marginVertical:20
           }}
-          onPress={() => navigation.navigate('Register') }
+          onPress={ResetInputs}
         />
 
       </View>
