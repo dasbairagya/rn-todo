@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 const Stacks = () => {
   return (
       <>
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName='Todo'>
         <Stack.Screen name="Home" component={Home} 
             options={{
             title: 'Home',

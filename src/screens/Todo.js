@@ -82,31 +82,31 @@ const Todo = ({navigation}) => {
      </>
     )
   }
-  useLayoutEffect( () => {
-    navigation.setOptions({
+  // useLayoutEffect( () => {
+  //   navigation.setOptions({
 
-        headerRight: () => (
-          <TouchableOpacity style={{ marginRight:20 }} onPress={navigation.navigate('Home')}>
-            <AntDesign name="logout" size={24} color="black"/>
-          </TouchableOpacity>
-        ),
-        headerLeft: () => (
-          <View style={{marginLeft:10}}>
-            <Avatar
-              size={54}
-              rounded
-              source={{ uri: 'https://randomuser.me/api/portraits/women/57.jpg' }}
-              title="Bj"
-              containerStyle={{ backgroundColor: 'grey' }}
-            >
-              <Avatar.Accessory size={23} />
-            </Avatar>
-            {/* <Avatar rounded source={{uri:auth?.currentUser?.photoURL}} /> */}
-          </View>
-        )
+  //       headerRight: () => (
+  //         <TouchableOpacity style={{ marginRight:20 }} onPress={navigation.navigate('Home')}>
+  //           <AntDesign name="logout" size={24} color="black"/>
+  //         </TouchableOpacity>
+  //       ),
+  //       headerLeft: () => (
+  //         <View style={{marginLeft:10}}>
+  //           <Avatar
+  //             size={54}
+  //             rounded
+  //             source={{ uri: 'https://randomuser.me/api/portraits/women/57.jpg' }}
+  //             title="Bj"
+  //             containerStyle={{ backgroundColor: 'grey' }}
+  //           >
+  //             <Avatar.Accessory size={23} />
+  //           </Avatar>
+  //           {/* <Avatar rounded source={{uri:auth?.currentUser?.photoURL}} /> */}
+  //         </View>
+  //       )
         
-    })
-  })
+  //   })
+  // })
 
   return (
 <>
@@ -115,7 +115,7 @@ const Todo = ({navigation}) => {
             source={{
             uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
             }}
-            style={{ width: 100, height: 100 }}
+            style={{ width: 80, height: 80}}
         />
         <Text style={Styles.defaultStyle.text}>My To Do List App</Text>
         <View style={Styles.todoStyle.formContainer}>
@@ -154,8 +154,8 @@ const Todo = ({navigation}) => {
             onPress={()=>{navigation.navigate('Home')}} 
             />    
         </TouchableOpacity> */}
-    </View>
-            <Button title='Logout' 
+          <Button title='Logout' 
+            color="rgb(239, 185, 67)" 
             icon={{
                     name: 'log-out',
                     type: 'font-awesome',
@@ -168,11 +168,16 @@ const Todo = ({navigation}) => {
                 borderWidth: 0,
                 borderRadius: 10,
                 width: 120,
-                marginVertical:20
+                marginBottom: 20,
+                
               }}
+              onPress={()=>{navigation.navigate('Home')}} 
             
-            />
-            </>
+          />
+
+    </View>
+          
+    </>
   )
 }
 

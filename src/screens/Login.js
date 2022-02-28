@@ -56,7 +56,7 @@ const Login = ({ navigation }) => {
     setTimeout(() => {
       //will check if the user is already login or not here
       setError(false);
-    }, 2000);
+    }, 3000);
   }; 
 
 
@@ -79,15 +79,16 @@ const Login = ({ navigation }) => {
 
   //login
   const SignIn = async () => {
-
-    // setIsloading(true);
+    setIsloading(true)
+    setTimeout(() => {console.log('Please Wait!')}, 2000);
     setError(false);
 
     if(username === 'admin' && password === 'PASSWORD'){
       ResetInputs()
       try {
         // await AsyncStorage.setItem('user', JSON.stringify(data));
-        navigation.replace('Todo');
+        
+        navigation.popToTop();
       } catch (e) {
         // saving error
       }
