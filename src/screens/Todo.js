@@ -8,20 +8,39 @@ const Todo = ({navigation}) => {
 
   const [item, setItem] = useState('')
   const [items, setItems] = useState([])
-  const [isCheckedItem, setIsCheckedItem] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const [isSetItemId, setIsSetItemId] = useState('');
   const [toggleEdit, setToggleEdit] = useState(false);
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+  const toggleSwitch = (id) => {
+    console.log('id=> '+id);
+    const updatedItems = items.map((elem)=>{
+      if(elem.id === id && elem.isChecked === false){
+          console.log('Item checked successfully');
+          return {...elem, isChecked: true}; //ammend the tergeted item keeping the old data as same with spread operator(e.g. '...elem')
+          
+      }else if(elem.id === id && elem.isChecked === true){
+          console.log('Item unchecked successfully');
+          return {...elem, isChecked: false};
+          
+      }
+      else{ 
+          return elem;
+      }
+  });
+  setItems(updatedItems); //
+    // setIsEnabled(previousState => !previousState);
+  }
 
   useEffect(() => {
     const newItem = {
       id: Date.now(),
       value: 'React Native',
-      check: false
+      isChecked: false
   };
   setItems([...items, newItem]);
-//   console.log(items);
+  console.log(items);
   }, []);
 
 
@@ -52,7 +71,7 @@ const Todo = ({navigation}) => {
         const newItem = {
             id: Date.now(),
             value: item,
-            check: false
+            isChecked: false
         };
         setItems([...items, newItem]);
         setItem('');
@@ -75,41 +94,16 @@ const Todo = ({navigation}) => {
         trackColor={{ false: "#767577", true: "#767577" }}
         thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
         ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
+        onValueChange={()=>toggleSwitch(item.id)}
+        value={item.isChecked}
       />
      </View>
      </>
     )
   }
-  // useLayoutEffect( () => {
-  //   navigation.setOptions({
-
-  //       headerRight: () => (
-  //         <TouchableOpacity style={{ marginRight:20 }} onPress={navigation.navigate('Home')}>
-  //           <AntDesign name="logout" size={24} color="black"/>
-  //         </TouchableOpacity>
-  //       ),
-  //       headerLeft: () => (
-  //         <View style={{marginLeft:10}}>
-  //           <Avatar
-  //             size={54}
-  //             rounded
-  //             source={{ uri: 'https://randomuser.me/api/portraits/women/57.jpg' }}
-  //             title="Bj"
-  //             containerStyle={{ backgroundColor: 'grey' }}
-  //           >
-  //             <Avatar.Accessory size={23} />
-  //           </Avatar>
-  //           {/* <Avatar rounded source={{uri:auth?.currentUser?.photoURL}} /> */}
-  //         </View>
-  //       )
-        
-  //   })
-  // })
 
   return (
-<>
+    <>
     <View style={Styles.todoStyle.container}>
         <Image
             source={{
@@ -145,15 +139,6 @@ const Todo = ({navigation}) => {
 
         )}
 
-
-
-        {/* <TouchableOpacity  >
-            <Button title="Logout" 
-            color="rgb(239, 185, 67)" 
-            style={Styles.todoStyle.buttonText} 
-            onPress={()=>{navigation.navigate('Home')}} 
-            />    
-        </TouchableOpacity> */}
           <Button title='Logout' 
             color="rgb(239, 185, 67)" 
             icon={{
@@ -184,6 +169,9 @@ const Todo = ({navigation}) => {
 export default Todo
 
 const styles = StyleSheet.create({
-
+  done: {
+    textDecorationLine: 'line-through',
+    textDecorationColor: '#ccc',
+}
 
 })
