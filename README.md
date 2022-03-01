@@ -2,15 +2,15 @@
 
 # Todo Screen
 
-![](assets/img/todo.png)
+![](assets/img/todo.png) ![](assets/img/todo-check.png)
 
 # Home Screen
 
-![](assets/img/home.png)
+![](assets/img/home.png) ![](assets/img/login-validation.png)
 
 # Register Screen
 
-![](assets/img/register.png)
+![](assets/img/register.png) ![](assets/img/register-validation.png)
 
 ### 1. Creating a new application
 ```

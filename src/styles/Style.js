@@ -61,6 +61,7 @@ export const todoStyle = StyleSheet.create({
     entityContainer: {
         borderBottomColor: '#cccccc',
         borderBottomWidth: StyleSheet.hairlineWidth,
+        paddingBottom: 5,
     },
     fixToText: {
         flexDirection: 'row',
