@@ -12,6 +12,9 @@ const Todo = ({navigation}) => {
   const [isSetItemId, setIsSetItemId] = useState('');
   const [toggleEdit, setToggleEdit] = useState(false);
   const [isEnabled, setIsEnabled] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
+
+
 
   const toggleSwitch = (id) => {
     console.log('id=> '+id);
@@ -40,34 +43,19 @@ const Todo = ({navigation}) => {
       isChecked: false
   };
   setItems([...items, newItem]);
-  console.log(items);
+  // console.log(items);
   }, []);
 
 
   //add item to list
   const addItem = () => {
-    // console.log(item);
+    console.log(item);
     if(!item){
-
-        alert('Please enter a value');
+      setErrorMsg(true);
     }
-    else if(item && isSetItemId){
-        //update item
-        const updatedItems = items.map((elem)=>{
-            if(elem.id === isSetItemId){
-                return {...elem, value: item}; //ammend the tergeted item keeping the old data as same with spread operator(e.g. '...elem')
-                
-            }else{ 
-                return elem;
-            }
-        });
-        setItems(updatedItems); //
-        setItem([]); //clear input
-        setIsSetItemId(null);//clear ItemId
-        setToggleEdit(false); //reset flag to false once item is updated
-        alert('Item updated successfully');
-    }else{
+    else{
         //to get the unique id for different items
+        setErrorMsg(false);
         const newItem = {
             id: Date.now(),
             value: item,
@@ -85,9 +73,18 @@ const Todo = ({navigation}) => {
       <>
       <View style={Styles.todoStyle.fixToText}>
         <View style={Styles.todoStyle.entityContainer}>
+        {item.isChecked ? 
+        <>
+            <Text style={styles.done} >
+                {index+1}. {item.value}
+            </Text></>
+            :
             <Text style={Styles.todoStyle.entityText} >
                 {index+1}. {item.value}
             </Text>
+           
+        }
+            
         </View>
         <Switch
         style={Styles.todoStyle.switch}
@@ -112,6 +109,7 @@ const Todo = ({navigation}) => {
             style={{ width: 80, height: 80}}
         />
         <Text style={Styles.defaultStyle.text}>My To Do List App</Text>
+        {errorMsg? <Text style={Styles.todoStyle.errorMsg}>Please enter a valid item</Text>: null}
         <View style={Styles.todoStyle.formContainer}>
             <TextInput
                 style={Styles.todoStyle.input}
@@ -123,9 +121,11 @@ const Todo = ({navigation}) => {
                 autoCapitalize="none"
             />
             <TouchableOpacity style={Styles.todoStyle.button} >
-                <Text style={Styles.todoStyle.buttonText} onClick={addItem}>Add</Text>
+                <Text style={Styles.todoStyle.buttonText} onPress={addItem}>Add</Text>
             </TouchableOpacity>
+            
         </View>
+       
  
         { items && (
             <View style={Styles.todoStyle.listContainer}>
@@ -171,7 +171,9 @@ export default Todo
 const styles = StyleSheet.create({
   done: {
     textDecorationLine: 'line-through',
-    textDecorationColor: '#ccc',
+    textDecorationColor: 'red',
+    fontSize: 20,
+    color: '#333333'
 }
 
 })

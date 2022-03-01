@@ -6,14 +6,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation }) => {
 
-  const getData = async () => {
-    const data = await AsyncStorage.getItem('user')
-    if(data){
-        return JSON.parse(data); //string to array
-    }else{
-        return [];
-    }
-  }   
+  // const getData = async () => {
+  //   const data = await AsyncStorage.getItem('user')
+  //   if(data){
+  //       return JSON.parse(data); //string to array
+  //   }else{
+  //       return [];
+  //   }
+  // }
   const [isloading, setIsloading] = useState(true);
   // const [user, setUser] = useState(getData());
   const [username, setUsername] = useState('');
@@ -80,7 +80,7 @@ const Login = ({ navigation }) => {
   //login
   const SignIn = async () => {
     setIsloading(true)
-    setTimeout(() => {console.log('Please Wait!')}, 2000);
+    setTimeout(() => {console.log('Loged in')}, 2000);
     setError(false);
 
     if(username === 'admin' && password === 'PASSWORD'){

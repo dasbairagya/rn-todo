@@ -75,6 +75,9 @@ export const todoStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 5,
+    },
+    errorMsg:{
+        color: 'red',
     }
 });
 
