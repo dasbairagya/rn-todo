@@ -43,6 +43,9 @@
 
 ````
 > npm start
+
+Username: admin
+Password: PASSWORD
 ````
 
 ## [Source]
