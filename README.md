@@ -19,6 +19,7 @@
 ☑️choose the blank template
 
 > cd rn-todo
+> npm install
 
 ````
 ### 2. Dependencies
