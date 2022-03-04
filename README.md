@@ -16,11 +16,13 @@
 ```
 > expo init rn-todo 
 
- OR if you clone this repo run
+☑️choose the blank template
+
+     OR 
+ 
+ if you clone this repo run
 
 > npm install
-
-☑️choose the blank template
 
 > cd rn-todo
 
