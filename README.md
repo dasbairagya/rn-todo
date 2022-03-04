@@ -14,12 +14,15 @@
 
 ### 1. Creating a new application
 ```
-> expo init rn-todo
+> expo init rn-todo 
+
+ OR if you clone this repo run
+
+> npm install
 
 ☑️choose the blank template
 
 > cd rn-todo
-> npm install
 
 ````
 ### 2. Dependencies
